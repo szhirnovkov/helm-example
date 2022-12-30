@@ -1,0 +1,17 @@
+ 
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: install-hook
+  annotations:
+    "helm.sh/hooks": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: install-hook
+        image: alpine
+        command: ["echo",  "I Made Some Actions After Install"]
+      restartPolicy: Never
+  backoffLimit: 4

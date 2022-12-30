@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: default
+kind: ConfigMap
+data:
+  {{- if eq .Values.environment "production" }}
+    MY_ENV: prod
+  {{- else if eq .Values.environment "development" }}
+    MY_ENV: dev
+  {{- else }}
+   MY_ENV: test
+  {{- end }}
